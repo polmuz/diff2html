@@ -60,12 +60,26 @@ describe('Utils', () => {
       });
       expect(result).toEqual('sample1.js → sample2.js');
     });
+    it('should generate the file name for a changed file and full rename with spaces', () => {
+      const result = filenameDiff({
+        oldName: 'my sample1.js',
+        newName: 'my sample2.js',
+      });
+      expect(result).toEqual('my sample1.js → my sample2.js');
+    });
     it('should generate the file name for a changed file and prefix rename', () => {
       const result = filenameDiff({
         oldName: 'src/path/sample.js',
         newName: 'source/path/sample.js',
       });
       expect(result).toEqual('{src → source}/path/sample.js');
+    });
+    it('should generate the file name for a changed file and prefix with spaces rename', () => {
+      const result = filenameDiff({
+        oldName: 'my src/path/sample.js',
+        newName: 'my source/path/sample.js',
+      });
+      expect(result).toEqual('{my src → my source}/path/sample.js');
     });
     it('should generate the file name for a changed file and suffix rename', () => {
       const result = filenameDiff({

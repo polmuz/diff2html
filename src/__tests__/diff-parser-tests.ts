@@ -316,6 +316,62 @@ describe('DiffParser', () => {
       `);
     });
 
+    it('should parse diff with spaces in file names', () => {
+      const diff =
+        'diff --git "a/my file.txt" "b/my file.txt"\n' +
+        'index 4c679d7..e9bd385 100644\n' +
+        '--- "a/my file.txt"' +
+        '+++ "b/my file.txt"\n' +
+        '@@ -1 +1,2 @@\n' +
+        '-cenas\n' +
+        '+cenas com ananas\n' +
+        '+bananas';
+      const result = parse(diff);
+      expect(result).toMatchInlineSnapshot(`
+        Array [
+          Object {
+            "addedLines": 2,
+            "blocks": Array [
+              Object {
+                "header": "@@ -1 +1,2 @@",
+                "lines": Array [
+                  Object {
+                    "content": "-cenas",
+                    "newNumber": undefined,
+                    "oldNumber": 1,
+                    "type": "delete",
+                  },
+                  Object {
+                    "content": "+cenas com ananas",
+                    "newNumber": 1,
+                    "oldNumber": undefined,
+                    "type": "insert",
+                  },
+                  Object {
+                    "content": "+bananas",
+                    "newNumber": 2,
+                    "oldNumber": undefined,
+                    "type": "insert",
+                  },
+                ],
+                "newStartLine": 1,
+                "oldStartLine": 1,
+                "oldStartLine2": null,
+              },
+            ],
+            "checksumAfter": "e9bd385",
+            "checksumBefore": "4c679d7",
+            "deletedLines": 1,
+            "isCombined": false,
+            "isGitDiff": true,
+            "mode": "100644",
+            "newName": "my file.txt",
+            "oldName": "my file.txt",
+          },
+        ]
+      `);
+    });
+
     it('should parse diff with deleted file', () => {
       const diff =
         'diff --git a/src/var/strundefined.js b/src/var/strundefined.js\n' +

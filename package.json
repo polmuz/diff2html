@@ -69,7 +69,6 @@
   "types": "./lib/diff2html.d.ts",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {

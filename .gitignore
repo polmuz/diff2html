@@ -32,6 +32,6 @@ bower_components/
 /_target/
 /src/diff2html-templates.*
 /docs/
-/bundles/
-/lib/
-/lib-esm/
+# /bundles/
+# /lib/
+# /lib-esm/
